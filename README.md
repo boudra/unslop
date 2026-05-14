@@ -44,23 +44,21 @@ Any harness that loads `SKILL.md` from a directory will work — symlink `~/dev/
 
 ## Layout
 
-```
-SKILL.md             Entry point. The dispatcher loads this.
-references/          Category-specific slop patterns the skill reads on demand.
-  noise-slop.md
-  structure-slop.md
-  module-slop.md
-  bolt-on-slop.md
-  unconfident-slop.md
-  density-slop.md
-  types-slop.md
-  errors-slop.md
-  tests-slop.md
-  naming-slop.md
-  react-slop.md
-```
+`SKILL.md` is the entry point — the dispatcher loads it, and the agent picks the relevant `references/*-slop.md` files based on the diff or plan it's reviewing.
 
-`SKILL.md` is the only file the dispatcher reads. The agent picks the relevant `references/*-slop.md` files based on the diff or plan it's reviewing.
+| Reference | What it catches |
+|-----------|----------------|
+| [noise-slop.md](references/noise-slop.md) | Obvious comments, debug leftovers, hedging, and unnecessary defensive code — visual noise without meaning. |
+| [structure-slop.md](references/structure-slop.md) | Copy-paste duplication, premature abstraction, god functions and files, and wrapper layers that emerge without architectural intent. |
+| [module-slop.md](references/module-slop.md) | Flat directories of peer files instead of deep modules — leaky internals, directory-as-namespace, features smeared across shared files. |
+| [bolt-on-slop.md](references/bolt-on-slop.md) | New coordinators, flags, or helpers added on top of existing code instead of reshaping what's already there. |
+| [unconfident-slop.md](references/unconfident-slop.md) | Optional chains, per-field fallbacks, and leaf-level branches that compensate for an uncommitted shape instead of validating at the boundary. |
+| [density-slop.md](references/density-slop.md) | Nested ternaries, dense object literals, complex booleans, and other cleverness that trades clarity for concision. |
+| [types-slop.md](references/types-slop.md) | `any` casts, type assertions, `ts-ignore`, untyped boundaries, and duplicated types that should be inferred from a schema. |
+| [errors-slop.md](references/errors-slop.md) | Plain `Error` instead of typed domain errors, user-facing copy mixed with log strings, blanket `catch (e)` without branching on type. |
+| [tests-slop.md](references/tests-slop.md) | Tests pinned to internals, weak assertions, mocks where real deps belong, tests treated as end-of-task chores instead of refactor equipment. |
+| [naming-slop.md](references/naming-slop.md) | Overly literal, verbose, convention-blind, or implementation-describing names instead of names that capture intent. |
+| [react-slop.md](references/react-slop.md) | `useEffect` for derived state, `useRef` coordination, unstable references, missing React Query, and other render-killing patterns. |
 
 ## License
 
